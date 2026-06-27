@@ -1,57 +1,8 @@
 import Link from "next/link";
 import GrassScene from "../components/GrassScene";
-import Tilt3DCard from "../components/Tilt3DCard";
 import ScrollReveal from "../components/ScrollReveal";
 import FAQAccordion from "../components/FAQAccordion";
-
-/* ── Service data ──────────────────────────────────────────── */
-const services = [
-  {
-    title: "Lawn Maintenance",
-    desc: "Mowing, edging, fertilization, and weed control — we keep your lawn pristine all season long.",
-    icon: "🌾",
-  },
-  {
-    title: "Landscape Design & Install",
-    desc: "Custom landscapes built around your lifestyle, from concept to final installation.",
-    icon: "🌿",
-  },
-  {
-    title: "Hardscapes",
-    desc: "Patios, retaining walls, and walkways crafted to be as functional as they are beautiful.",
-    icon: "🪨",
-  },
-  {
-    title: "Outdoor Kitchens & Fireplaces",
-    desc: "Extend your living space outside with custom grills, kitchens, and fireplaces.",
-    icon: "🔥",
-  },
-  {
-    title: "Irrigation Systems",
-    desc: "Smart, efficient irrigation designed and installed to keep your lawn green year-round.",
-    icon: "💧",
-  },
-  {
-    title: "Landscape Lighting",
-    desc: "Accent, path, and spot lighting to enhance the beauty and safety of your property.",
-    icon: "✨",
-  },
-  {
-    title: "Drainage Solutions",
-    desc: "Proper drainage to protect your property and prevent damage before it starts.",
-    icon: "🌊",
-  },
-  {
-    title: "Land Clearing & Grading",
-    desc: "Clearing overgrown lots, improving drainage, and getting your property ready to build.",
-    icon: "🚜",
-  },
-  {
-    title: "Mulch & Pine Needles",
-    desc: "Add curb appeal and protect your beds with professional mulch and pine needle installs.",
-    icon: "🍂",
-  },
-];
+import ServicesSection from "../components/ServicesSection";
 
 /* ── Stats ─────────────────────────────────────────────────── */
 const stats = [
@@ -103,7 +54,7 @@ export default function HomePage() {
         />
 
         {/* ── Hero content ── */}
-        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-40">
+        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-40">
           {/* Floating badge */}
           <div className="animate-float inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/15 text-white/90 text-xs font-semibold px-4 py-2 rounded-full mb-8">
             <span className="text-yellow">★</span> Rated 4.9 on Google · North Carolina
@@ -160,59 +111,9 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          SERVICES — 3D tilt cards on dark bg
+          SERVICES — expandable cards
       ══════════════════════════════════════════ */}
-      <section className="py-24" style={{ background: "#0a2010" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="text-center mb-14">
-            <p className="section-label" style={{ color: "#facc15" }}>What We Do</p>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4 leading-tight">
-              Our Services
-            </h2>
-            <p className="text-white/50 max-w-2xl mx-auto">
-              From a quick lawn cut to a complete outdoor transformation — we have
-              the expertise to bring your vision to life.
-            </p>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((s, i) => (
-              <ScrollReveal key={s.title} delay={i * 60}>
-                <Tilt3DCard className="h-full">
-                  <div
-                    className="h-full rounded-2xl p-6 border cursor-default"
-                    style={{
-                      background: "linear-gradient(135deg, #0f2e18 0%, #0d2514 100%)",
-                      borderColor: "rgba(30,126,52,0.3)",
-                    }}
-                  >
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
-                      style={{ background: "rgba(250,204,21,0.12)" }}
-                    >
-                      {s.icon}
-                    </div>
-                    <h3 className="text-white font-serif font-bold text-lg mb-2">{s.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
-                    <div className="mt-4 flex items-center text-yellow text-xs font-semibold gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      Learn more →
-                    </div>
-                  </div>
-                </Tilt3DCard>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal className="text-center mt-10">
-            <Link
-              href="/services"
-              className="inline-block border-2 border-yellow/50 text-yellow hover:bg-yellow hover:text-green-dark font-bold px-8 py-3 rounded-full transition-all duration-200"
-            >
-              See All Services
-            </Link>
-          </ScrollReveal>
-        </div>
-      </section>
+      <ServicesSection />
 
       {/* ══════════════════════════════════════════
           ABOUT — light section
@@ -343,46 +244,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          CTA BANNER
-      ══════════════════════════════════════════ */}
-      <section
-        className="relative overflow-hidden py-28 text-center noise"
-        style={{ background: "linear-gradient(135deg, #071a0b 0%, #0d3d1a 60%, #1a5c2a 100%)" }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 60% at 50% 100%, rgba(250,204,21,0.08) 0%, transparent 70%)",
-          }}
-        />
-        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <p className="text-yellow uppercase tracking-widest text-xs font-bold mb-4">
-              Ready to transform your yard?
-            </p>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-5 leading-tight">
-              Let&apos;s Build Something{" "}
-              <span className="shimmer-text">Beautiful</span>
-            </h2>
-            <p className="text-white/60 text-lg mb-10">
-              Contact us for a free consultation. Open Monday–Friday, 8 AM–5 PM.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary text-base">
-                Get a Free Quote
-              </Link>
-              <a
-                href="tel:9104342533"
-                className="btn-ghost text-base"
-              >
-                Call (910) 434-2533
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
     </>
   );
 }

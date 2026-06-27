@@ -67,7 +67,7 @@ export default function GrassScene() {
       scene.add(ground);
 
       /* ── Grass ──────────────────────────────────────────────── */
-      const bladeCount = mobile ? 20000 : 65000;
+      const bladeCount = mobile ? 40000 : 120000;
       grassMesh = new THREE.Mesh(
         buildGrassGeo(THREE, bladeCount),
         buildGrassMat(THREE),
@@ -166,24 +166,33 @@ function buildGrassGeo(THREE, count) {
   const uvCoords  = new Float32Array(count * VPB * 2);
   const heights   = new Float32Array(count * VPB);
   const bladeRoots= new Float32Array(count * VPB * 2);
+  const stripes   = new Float32Array(count * VPB);   // stripe index per vertex
   const indices   = new Uint32Array (count * IPB);
 
-  const FIELD_R   = 22;   // field half-size — large enough to fill all camera frustum corners
-  const H_MIN     = 0.38;
-  const H_MAX     = 0.82;
-  const W_BASE    = 0.030;
+  const FIELD_R   = 22;
+  const H_MIN     = 0.40;
+  const H_MAX     = 0.85;
+  const W_BASE    = 0.042;
+
+  const gridN    = Math.ceil(Math.sqrt(count));
+  const cellSize = (FIELD_R * 2) / gridN;
 
   for (let i = 0; i < count; i++) {
     const vBase = i * VPB;
     const iBase = i * IPB;
 
-    // Random blade placement & shape
-    const rootX  = (Math.random() - 0.5) * FIELD_R * 2;
-    const rootZ  = (Math.random() - 0.5) * FIELD_R * 2;
+    const col   = i % gridN;
+    const row   = Math.floor(i / gridN);
+    const cellX = -FIELD_R + col * cellSize;
+    const cellZ = -FIELD_R + row * cellSize;
+
+    const rootX  = cellX + (Math.random() - 0.5) * cellSize * 0.95;
+    const rootZ  = cellZ + (Math.random() - 0.5) * cellSize * 0.95;
     const bladeH = H_MIN + Math.random() * (H_MAX - H_MIN);
     const bladeW = W_BASE * (0.65 + Math.random() * 0.7);
     const yRot   = Math.random() * Math.PI * 2;
-    const lean   = (Math.random() - 0.5) * 0.35;   // sideways lean
+    const lean   = (Math.random() - 0.5) * 0.35;
+    const stripeIdx = 0; // unused, kept for attribute write below
 
     const cosY = Math.cos(yRot);
     const sinY = Math.sin(yRot);
@@ -223,6 +232,10 @@ function buildGrassGeo(THREE, count) {
       const ri = (vBase + s * 2) * 2;
       bladeRoots[ri + 0] = rootX; bladeRoots[ri + 1] = rootZ;
       bladeRoots[ri + 2] = rootX; bladeRoots[ri + 3] = rootZ;
+
+      // Stripe index for fragment shader lighting
+      stripes[vBase + s * 2    ] = stripeIdx;
+      stripes[vBase + s * 2 + 1] = stripeIdx;
     }
 
     // Quad indices for each segment
@@ -242,6 +255,7 @@ function buildGrassGeo(THREE, count) {
   geo.setAttribute("uv",        new THREE.BufferAttribute(uvCoords,   2));
   geo.setAttribute("height",    new THREE.BufferAttribute(heights,    1));
   geo.setAttribute("bladeRoot", new THREE.BufferAttribute(bladeRoots, 2));
+  geo.setAttribute("stripe",    new THREE.BufferAttribute(stripes,    1));
   geo.setIndex(new THREE.BufferAttribute(indices, 1));
   geo.computeVertexNormals();
   return geo;
@@ -304,22 +318,18 @@ function buildGrassMat(THREE) {
         pos.x += wind * h2;
         pos.z += wind * 0.45 * h2;
 
-        /* ── Mouse push ───────────────────────────────────────
-           Distance from blade root to mouse in world XZ.
-           Push is radial, falls off with distance, strongest
-           at tip (h2).                                          */
-        vec2  toMouse = bladeRoot - mousePos;
-        float dist    = length(toMouse);
-        float RADIUS  = 2.6;
-        float push    = max(0.0, 1.0 - dist / RADIUS);
-        push = push * push * 1.6;        // sharpen falloff
+        /* ── Mouse lean ──────────────────────────────────────
+           Each blade leans slightly left or right depending on
+           which side of it the mouse is on. No radial bubble —
+           just a gentle X-axis tilt with a wide smooth falloff. */
+        vec2  delta     = bladeRoot - mousePos;
+        float dist      = length(delta);
+        // smoothstep gives a very gradual fade — no hard boundary
+        float proximity = 1.0 - smoothstep(0.0, 5.5, dist);
 
-        vec2  pushDir = dist > 0.001
-          ? normalize(toMouse)
-          : vec2(0.0, 1.0);
-
-        pos.x += pushDir.x * push * h2;
-        pos.z += pushDir.y * push * h2;
+        // Normalised X component: tells us left (-1) or right (+1)
+        float leanDir = delta.x / max(dist, 0.15);
+        pos.x += leanDir * proximity * 0.38 * h2;
 
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
       }
@@ -331,7 +341,6 @@ function buildGrassMat(THREE) {
       varying vec2  vUv;
 
       void main() {
-        /* Root → mid → tip colour ramp */
         vec3 rootCol = vec3(0.05, 0.22, 0.03);
         vec3 midCol  = vec3(0.14, 0.48, 0.07);
         vec3 tipCol  = vec3(0.36, 0.72, 0.10);
@@ -339,11 +348,9 @@ function buildGrassMat(THREE) {
         vec3 col = mix(rootCol, midCol, smoothstep(0.0,  0.45, vHeight));
              col = mix(col,     tipCol, smoothstep(0.38, 1.00, vHeight));
 
-        /* Edge ambient-occlusion: darken near left/right edges */
-        float edgeDist = abs(vUv.x - 0.5) * 2.0;  // 0 centre, 1 edge
+        float edgeDist = abs(vUv.x - 0.5) * 2.0;
         float ao       = 1.0 - 0.28 * edgeDist * edgeDist;
 
-        /* Very slight specular highlight on upper-facing tip */
         float spec = pow(max(0.0, vHeight - 0.7), 3.0) * 0.18;
 
         gl_FragColor = vec4(col * ao + spec, 1.0);

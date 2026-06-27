@@ -32,8 +32,8 @@ body {
 }
 
 @keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
+  0%   { background-position: 0% center; }
+  100% { background-position: -200% center; }
 }
 
 /* ── Utility animations ────────────────────────── */
@@ -70,9 +70,10 @@ body {
 .shimmer-text {
   background: linear-gradient(
     90deg,
-    #facc15 0%,
-    #fef08a 40%,
-    #facc15 60%,
+    #ca8a04 0%,
+    #facc15 25%,
+    #fef9c3 50%,
+    #facc15 75%,
     #ca8a04 100%
   );
   background-size: 200% auto;

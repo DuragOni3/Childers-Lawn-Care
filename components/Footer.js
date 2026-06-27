@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LogoImage from "./LogoImage";
 
 export default function Footer() {
   return (
@@ -9,9 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img
-                src="/logo.png"
-                alt="Childers Lawn Care LLC"
+              <LogoImage
                 className="h-16 w-auto"
                 style={{ filter: "drop-shadow(0 1px 6px rgba(0,0,0,0.5))" }}
               />
@@ -26,7 +25,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="https://www.facebook.com/profile.php?id=100063797604681"
+                href="https://www.facebook.com/profile.php?id=100089052530467"
                 target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-yellow hover:text-green-dark flex items-center justify-center transition-all duration-200"
                 aria-label="Facebook"
@@ -55,7 +54,6 @@ export default function Footer() {
             <h4 className="text-yellow uppercase tracking-widest text-xs font-bold mb-5">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               {[
-                { href: "/",          label: "Home" },
                 { href: "/services",  label: "Services" },
                 { href: "/about",     label: "About Us" },
                 { href: "/portfolio", label: "Portfolio" },
@@ -83,11 +81,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@childerslawnandlandscapellc.com" className="hover:text-yellow transition-colors flex items-center gap-2">
+                <a href="mailto:childerslawncare2@yahoo.com" className="hover:text-yellow transition-colors flex items-center gap-2">
                   <svg className="w-4 h-4 text-yellow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  hello@childerslawnandlandscapellc.com
+                  childerslawncare2@yahoo.com
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -102,7 +100,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/30">
           <p>© 2024 Childers Lawn &amp; Landscape LLC — All Rights Reserved.</p>
-          <p>North Carolina</p>
+          <p>Website by Monolith Design</p>
         </div>
       </div>
     </footer>

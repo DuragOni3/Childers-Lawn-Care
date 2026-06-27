@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoImage from "./LogoImage";
 
 const navLinks = [
   { href: "/",          label: "Home" },
@@ -32,21 +33,19 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-24">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <img
-              src="/logo.png"
-              alt="Childers Lawn Care LLC"
-              className="h-12 w-auto transition-all group-hover:scale-105"
+          <Link href="/" className="flex items-center gap-4 group">
+            <LogoImage
+              className="h-20 w-auto transition-all group-hover:scale-105"
               style={{ filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.4))" }}
             />
             <div className="leading-tight">
-              <span className="text-white font-serif font-bold text-sm sm:text-base block">
+              <span className="text-white font-serif font-bold text-xl sm:text-2xl block">
                 Childer&apos;s Lawn Care
               </span>
-              <span className="text-yellow text-[10px] tracking-widest uppercase">&amp; More LLC</span>
+              <span className="text-yellow text-sm tracking-widest uppercase">&amp; More LLC</span>
             </div>
           </Link>
 
