@@ -281,7 +281,7 @@ function RateModal({ service, onClose }) {
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
       <div
-        className="relative w-full max-w-md rounded-2xl p-8 shadow-2xl"
+        className="relative w-full max-w-md rounded-2xl p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto"
         style={{
           background: "#0d2514",
           border: "1px solid rgba(250,204,21,0.2)",
@@ -412,7 +412,7 @@ function ServiceRow({ service, index, onRates, onPhotos }) {
     >
       {/* Placeholder art */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-        <div className="text-9xl opacity-15 mb-3">{service.icon}</div>
+        <div className="text-6xl sm:text-9xl opacity-15 mb-3">{service.icon}</div>
       </div>
 
       {/* Hover overlay + icon */}
@@ -454,7 +454,7 @@ function ServiceRow({ service, index, onRates, onPhotos }) {
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 items-stretch">
+    <div id={service.id} className="grid grid-cols-1 lg:grid-cols-5 gap-5 items-stretch scroll-mt-28">
       {!flip ? (
         <>
           <div className="lg:col-span-2">{infoBox}</div>

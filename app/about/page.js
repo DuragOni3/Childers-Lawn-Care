@@ -81,7 +81,7 @@ export default function AboutPage() {
 
           {/* ── Level 1 — 1 card centered ── */}
           <div className="flex justify-center mb-0">
-            <div className="w-56 sm:w-72">
+            <div className="w-40 sm:w-56 lg:w-72">
               <TeamCard size="lg" />
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           <Connector />
 
           {/* ── Level 2 — 3 cards ── */}
-          <div className="grid grid-cols-3 gap-6 sm:gap-10 max-w-3xl mx-auto mb-0">
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 lg:gap-10 max-w-xs sm:max-w-xl lg:max-w-3xl mx-auto mb-0">
             <TeamCard /><TeamCard /><TeamCard />
           </div>
 
@@ -98,7 +98,7 @@ export default function AboutPage() {
           <Connector />
 
           {/* ── Level 3 — 3 cards ── */}
-          <div className="grid grid-cols-3 gap-6 sm:gap-10 max-w-3xl mx-auto">
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 lg:gap-10 max-w-xs sm:max-w-xl lg:max-w-3xl mx-auto">
             <TeamCard /><TeamCard /><TeamCard />
           </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Tilt3DCard from "./Tilt3DCard";
 import ScrollReveal from "./ScrollReveal";
 
@@ -10,18 +11,21 @@ const services = [
     title: "Lawn Maintenance",
     desc: "Mowing, edging, fertilization, and weed control — we keep your lawn pristine all season long.",
     icon: "🌾",
+    slug: "lawn-maintenance",
     featured: true,
   },
   {
     title: "Land Clearing & Grading",
     desc: "Clearing overgrown lots, improving drainage, and getting your property ready to build.",
     icon: "🚜",
+    slug: "land-clearing",
     featured: true,
   },
   {
     title: "Irrigation Systems",
     desc: "Smart, efficient irrigation designed and installed to keep your lawn green year-round.",
     icon: "💧",
+    slug: "irrigation",
     featured: true,
   },
 
@@ -30,36 +34,42 @@ const services = [
     title: "Landscape Design & Install",
     desc: "Custom landscapes built around your lifestyle, from concept to final installation.",
     icon: "🌿",
+    slug: "landscape-design",
     featured: false,
   },
   {
     title: "Hardscapes",
     desc: "Patios, retaining walls, and walkways crafted to be as functional as they are beautiful.",
     icon: "🪨",
+    slug: "hardscapes",
     featured: false,
   },
   {
     title: "Outdoor Kitchens & Fireplaces",
     desc: "Extend your living space outside with custom grills, kitchens, and fireplaces.",
     icon: "🔥",
+    slug: "outdoor-kitchens",
     featured: false,
   },
   {
     title: "Landscape Lighting",
     desc: "Accent, path, and spot lighting to enhance the beauty and safety of your property.",
     icon: "✨",
+    slug: "lighting",
     featured: false,
   },
   {
     title: "Drainage Solutions",
     desc: "Proper drainage to protect your property and prevent damage before it starts.",
     icon: "🌊",
+    slug: "drainage",
     featured: false,
   },
   {
     title: "Mulch & Pine Needles",
     desc: "Add curb appeal and protect your beds with professional mulch and pine needle installs.",
     icon: "🍂",
+    slug: "mulch",
     featured: false,
   },
 ];
@@ -70,24 +80,29 @@ const hidden   = services.filter((s) => !s.featured);
 function ServiceCard({ s, index }) {
   return (
     <ScrollReveal delay={index * 60}>
-      <Tilt3DCard className="h-full">
-        <div
-          className="h-full rounded-2xl p-6 border cursor-default"
-          style={{
-            background: "linear-gradient(135deg, #0f2e18 0%, #0d2514 100%)",
-            borderColor: "rgba(30,126,52,0.3)",
-          }}
-        >
+      <Link href={`/services#${s.slug}`} className="block h-full group">
+        <Tilt3DCard className="h-full">
           <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
-            style={{ background: "rgba(250,204,21,0.12)" }}
+            className="h-full rounded-2xl p-6 border transition-colors duration-200"
+            style={{
+              background: "linear-gradient(135deg, #0f2e18 0%, #0d2514 100%)",
+              borderColor: "rgba(30,126,52,0.3)",
+            }}
           >
-            {s.icon}
+            <div
+              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
+              style={{ background: "rgba(250,204,21,0.12)" }}
+            >
+              {s.icon}
+            </div>
+            <h3 className="text-white font-serif font-bold text-lg mb-2 group-hover:text-yellow transition-colors duration-200">{s.title}</h3>
+            <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
+            <p className="text-yellow/60 text-xs font-semibold mt-4 group-hover:text-yellow transition-colors duration-200">
+              Learn more →
+            </p>
           </div>
-          <h3 className="text-white font-serif font-bold text-lg mb-2">{s.title}</h3>
-          <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
-        </div>
-      </Tilt3DCard>
+        </Tilt3DCard>
+      </Link>
     </ScrollReveal>
   );
 }

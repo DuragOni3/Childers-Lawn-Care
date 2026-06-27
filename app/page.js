@@ -60,7 +60,7 @@ export default function HomePage() {
             <span className="text-yellow">★</span> Rated 4.9 on Google · North Carolina
           </div>
 
-          <h1 className="animate-fade-up text-5xl sm:text-6xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-6"
+          <h1 className="animate-fade-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.1] mb-6"
               style={{ textShadow: "0 2px 24px rgba(0,0,0,0.5)" }}>
             Your Dream{" "}
             <span className="shimmer-text">Outdoor Space</span>

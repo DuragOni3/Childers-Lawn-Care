@@ -4,21 +4,26 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Facebook Page Plugin.
- * The plugin's hard max is 500 px wide. If the container is wider we
- * scale the plugin up with CSS transform so it always fills edge-to-edge.
- * The outer div clips to the desired height so nothing overflows.
+ * Renders at PLUGIN_MAX (500 px) then CSS-scales to fill the parent
+ * container in both width and height. The parent controls size via CSS
+ * (e.g. Tailwind responsive height classes on the wrapper in contact/page.js).
  */
 const PLUGIN_MAX = 500;
 
-export default function FacebookFeed({ pageUrl, height = 560 }) {
+export default function FacebookFeed({ pageUrl }) {
   const containerRef = useRef(null);
   const [boxWidth,  setBoxWidth]  = useState(0);
+  const [boxHeight, setBoxHeight] = useState(400);
   const [sdkReady,  setSdkReady]  = useState(false);
 
-  /* ── Measure container (and re-measure on resize) ── */
+  /* ── Measure container on mount and every resize ── */
   useEffect(() => {
     const measure = () => {
-      if (containerRef.current) setBoxWidth(containerRef.current.offsetWidth);
+      if (containerRef.current) {
+        setBoxWidth(containerRef.current.offsetWidth);
+        const h = containerRef.current.offsetHeight;
+        if (h > 0) setBoxHeight(h);
+      }
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -34,7 +39,6 @@ export default function FacebookFeed({ pageUrl, height = 560 }) {
       document.body.prepend(d);
     }
     if (window.FB) { setSdkReady(true); return; }
-
     window.fbAsyncInit = () => {
       window.FB.init({ xfbml: false, version: "v19.0" });
       setSdkReady(true);
@@ -47,29 +51,23 @@ export default function FacebookFeed({ pageUrl, height = 560 }) {
     }
   }, []);
 
-  /* ── Re-parse when SDK ready + width known ── */
+  /* ── Re-parse when SDK ready + dimensions change ── */
   useEffect(() => {
     if (sdkReady && boxWidth > 0 && window.FB && containerRef.current) {
       window.FB.XFBML.parse(containerRef.current);
     }
-  }, [sdkReady, boxWidth]);
+  }, [sdkReady, boxWidth, boxHeight]);
 
-  /* ── Scale maths ─────────────────────────────────────────────
-     Render the plugin at PLUGIN_MAX (500 px) then scale it up so
-     it fills the full container width.  The outer wrapper clips to
-     the desired height so the extra scaled pixels are hidden.
-  ──────────────────────────────────────────────────────────── */
   const scale        = boxWidth > 0 ? boxWidth / PLUGIN_MAX : 1;
-  const pluginHeight = Math.round(height / scale); // pre-scale height
+  const pluginHeight = Math.round(boxHeight / scale);
 
   return (
-    /* Outer: clips to the card height, hides overflow */
+    /* Fills 100% of parent — parent's CSS classes control the height */
     <div
       ref={containerRef}
-      style={{ width: "100%", height: `${height}px`, overflow: "hidden" }}
+      style={{ width: "100%", height: "100%", overflow: "hidden" }}
     >
       {boxWidth > 0 && (
-        /* Inner: rendered at 500 px, then scaled up to fill */
         <div
           style={{
             width: `${PLUGIN_MAX}px`,

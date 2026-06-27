@@ -36,12 +36,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-24">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 group">
+          <Link href="/" className="flex items-center gap-3 group">
             <LogoImage
-              className="h-20 w-auto transition-all group-hover:scale-105"
+              className="h-14 sm:h-20 w-auto transition-all group-hover:scale-105"
               style={{ filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.4))" }}
             />
-            <div className="leading-tight">
+            <div className="leading-tight hidden sm:block">
               <span className="text-white font-serif font-bold text-xl sm:text-2xl block">
                 Childer&apos;s Lawn Care
               </span>

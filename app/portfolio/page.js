@@ -453,7 +453,7 @@ export default function PortfolioPage() {
             <div className="flex-1 border-t border-white/10" />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {gallerySlots.map((g, i) => (
               <button
                 key={i}

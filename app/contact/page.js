@@ -189,11 +189,10 @@ export default function ContactPage() {
                 </a>
               </div>
 
-              {/* Facebook Page Plugin — width measured from container so it fills perfectly */}
-              <div className="w-full overflow-hidden" style={{ height: "560px" }}>
+              {/* Facebook Page Plugin — parent height is responsive via Tailwind */}
+              <div className="w-full overflow-hidden h-64 sm:h-96 lg:h-[520px]">
                 <FacebookFeed
                   pageUrl="https://www.facebook.com/profile.php?id=100089052530467"
-                  height={560}
                 />
               </div>
             </div>
@@ -230,10 +229,7 @@ export default function ContactPage() {
               </div>
 
               {/* Instagram feed placeholder */}
-              <div
-                className="flex flex-col items-center justify-center text-center px-8"
-                style={{ height: "560px" }}
-              >
+              <div className="flex flex-col items-center justify-center text-center px-6 sm:px-8 h-64 sm:h-96 lg:h-[520px]">
                 {/* IG gradient logo */}
                 <div
                   className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-lg"
