@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
  * removed — any white *inside* the logo (e.g. text) stays intact.
  */
 export default function LogoImage({ alt = "Childers Lawn Care LLC", className, style }) {
-  const [src, setSrc] = useState("/Logo.png");
+  const [src, setSrc] = useState("/logo.png");
 
   useEffect(() => {
     const img = new Image();
@@ -76,7 +76,7 @@ export default function LogoImage({ alt = "Childers Lawn Care LLC", className, s
       setSrc(canvas.toDataURL("image/png"));
     };
 
-    img.src = "/Logo.png";
+    img.src = "/logo.png";
   }, []);
 
   return (
