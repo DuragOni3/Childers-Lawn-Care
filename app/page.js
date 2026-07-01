@@ -129,7 +129,7 @@ export default function HomePage() {
                 Built on Hard Work<br />&amp; Community
               </h2>
               <p className="text-gray-500 leading-relaxed mb-5">
-                Hunter Childers founded Childers Lawn &amp; Landscape LLC in 2018.
+                Jace Childers founded Childers Lawn &amp; Landscape LLC in 2018.
                 What started as a one-man operation has grown into a dedicated team
                 committed to top-quality work and exceptional customer service.
               </p>
@@ -176,10 +176,10 @@ export default function HomePage() {
 
                 <div className="flex items-center gap-4 relative z-10">
                   <div className="w-14 h-14 bg-yellow rounded-full flex items-center justify-center text-green-dark font-bold text-2xl font-serif shadow-lg">
-                    H
+                    J
                   </div>
                   <div>
-                    <p className="text-white font-bold">Hunter Childers</p>
+                    <p className="text-white font-bold">Jace Childers</p>
                     <p className="text-yellow text-sm">Owner, Childers Lawn &amp; Landscape LLC</p>
                   </div>
                 </div>

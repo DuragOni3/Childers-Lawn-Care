@@ -12,6 +12,7 @@ const projects = [
     title: "Residential Lawn Transformation",
     category: "Lawn Maintenance",
     icon: "🌾",
+    photo: "portfolio-lawn.jpg",
     from: "#0d3d1a",
     to:   "#1e6b30",
     description:
@@ -22,6 +23,7 @@ const projects = [
     title: "Backyard Patio & Retaining Wall",
     category: "Hardscapes",
     icon: "🪨",
+    photo: "portfolio-patio.jpg",
     from: "#1c2e08",
     to:   "#2e4a14",
     description:
@@ -32,6 +34,7 @@ const projects = [
     title: "Front-Yard Landscape Bed Install",
     category: "Landscape Design & Install",
     icon: "🌿",
+    photo: "portfolio-beds.jpg",
     from: "#083018",
     to:   "#104a22",
     description:
@@ -42,6 +45,7 @@ const projects = [
     title: "6-Zone Smart Irrigation System",
     category: "Irrigation Systems",
     icon: "💧",
+    photo: "portfolio-irrigation.jpg",
     from: "#081828",
     to:   "#0d2a42",
     description:
@@ -52,6 +56,7 @@ const projects = [
     title: "3-Acre Land Clearing & Site Prep",
     category: "Land Clearing & Grading",
     icon: "🚜",
+    photo: "portfolio-clearing.jpg",
     from: "#1e1608",
     to:   "#2e2214",
     description:
@@ -229,7 +234,8 @@ function PhotoCard({ project, onClick, className = "" }) {
         <p className="text-white font-serif font-bold text-lg sm:text-xl leading-snug text-left">
           {project.title}
         </p>
-        <p className="text-white/0 group-hover:text-white/60 text-xs mt-1 transition-all duration-300 text-left">
+        <p className="text-yellow/50 font-mono text-xs mt-1 text-left">{project.photo}</p>
+        <p className="text-white/0 group-hover:text-white/60 text-xs mt-0.5 transition-all duration-300 text-left">
           Click to view details →
         </p>
       </div>
@@ -465,10 +471,10 @@ export default function PortfolioPage() {
                   aspectRatio: "1 / 1",
                 }}
               >
-                {/* Camera icon */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                {/* Camera icon + filename */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center px-1">
                   <svg
-                    className="w-7 h-7 text-white/15 group-hover:text-white/30 mb-1 transition-colors duration-200"
+                    className="w-6 h-6 text-white/15 group-hover:text-white/30 mb-1 transition-colors duration-200"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -480,8 +486,9 @@ export default function PortfolioPage() {
                       d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                     />
                   </svg>
-                  <span className="text-white/10 group-hover:text-white/25 text-[10px] font-medium transition-colors duration-200">
-                    Coming Soon
+                  <span className="text-yellow/30 font-mono text-center leading-tight"
+                        style={{ fontSize: "0.55rem" }}>
+                    gallery-{String(i + 1).padStart(2, "0")}.jpg
                   </span>
                 </div>
 

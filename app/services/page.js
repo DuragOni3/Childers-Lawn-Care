@@ -11,6 +11,7 @@ const services = [
     id: "lawn-maintenance",
     title: "Lawn Maintenance",
     icon: "🌾",
+    photoPrefix: "lawn",
     tagline: "Pristine lawns, all season long.",
     description:
       "We handle the full lawn care spectrum — regular mowing on your schedule, precision edging, seasonal fertilization programs to keep grass thick and green, and targeted weed control. Every plan is customized to your property's size and conditions.",
@@ -26,6 +27,7 @@ const services = [
     id: "landscape-design",
     title: "Landscape Design & Install",
     icon: "🌿",
+    photoPrefix: "landscape",
     tagline: "Your outdoor vision, professionally built.",
     description:
       "From concept to completion, we design and install landscapes that complement your home and lifestyle. Plant selection, bed layouts, focal features, and seasonal color — all tailored to you and your property.",
@@ -40,6 +42,7 @@ const services = [
     id: "hardscapes",
     title: "Hardscapes",
     icon: "🪨",
+    photoPrefix: "hardscape",
     tagline: "Patios, walls, and walkways built to last.",
     description:
       "Retaining walls that hold, patios that impress, and walkways that guide — all built with quality materials and expert craftsmanship designed to stand up to North Carolina's weather for decades.",
@@ -54,6 +57,7 @@ const services = [
     id: "outdoor-kitchens",
     title: "Outdoor Kitchens & Fireplaces",
     icon: "🔥",
+    photoPrefix: "kitchen",
     tagline: "Extend your living space outdoors.",
     description:
       "Custom outdoor kitchens with built-in grills, counters, and prep stations, plus stone and brick fireplaces that become the backyard centerpiece. Perfect for entertaining or relaxing year-round.",
@@ -67,6 +71,7 @@ const services = [
     id: "irrigation",
     title: "Irrigation Systems",
     icon: "💧",
+    photoPrefix: "irrigation",
     tagline: "Smart watering that saves time and water.",
     description:
       "We design, install, and maintain smart irrigation systems tailored to your property's zones and plant types. Proper coverage means less wasted water and a consistently healthy lawn and landscape.",
@@ -81,6 +86,7 @@ const services = [
     id: "lighting",
     title: "Landscape Lighting",
     icon: "✨",
+    photoPrefix: "lighting",
     tagline: "Beautiful and functional after dark.",
     description:
       "Professionally designed low-voltage LED landscape lighting to accent trees, pathways, and architecture. Great for curb appeal, safety, and extending your outdoor enjoyment into the evening.",
@@ -94,6 +100,7 @@ const services = [
     id: "drainage",
     title: "Drainage Solutions",
     icon: "🌊",
+    photoPrefix: "drainage",
     tagline: "Protect your property before damage starts.",
     description:
       "Standing water, soggy lawns, and erosion are signs of drainage problems. We assess your property and install French drains, channel drains, or grading solutions to redirect water away from your home.",
@@ -108,6 +115,7 @@ const services = [
     id: "land-clearing",
     title: "Land Clearing & Grading",
     icon: "🚜",
+    photoPrefix: "clearing",
     tagline: "Make your property ready to build.",
     description:
       "Whether you're clearing overgrown brush, preparing a lot for construction, or regrading for better drainage, our equipment and team handle jobs of all sizes — from residential lots to larger acreage.",
@@ -122,6 +130,7 @@ const services = [
     id: "mulch",
     title: "Mulch & Pine Needles",
     icon: "🍂",
+    photoPrefix: "mulch",
     tagline: "Curb appeal with lasting protection.",
     description:
       "Fresh mulch and pine needles insulate roots, retain moisture, and suppress weeds. We install bulk materials quickly and cleanly with precise edging for a polished, finished look.",
@@ -184,8 +193,8 @@ function PhotoModal({ service, onClose }) {
               >
                 <div className="text-8xl mb-4 opacity-25">{service.icon}</div>
                 <p className="text-white/30 text-sm font-medium">{service.title}</p>
-                <p className="text-white/20 text-xs mt-1">
-                  Photo {i + 1} — Coming Soon
+                <p className="text-yellow/40 font-mono text-xs mt-2">
+                  {service.photoPrefix}-{i + 1}.jpg
                 </p>
               </div>
             );
@@ -446,8 +455,9 @@ function ServiceRow({ service, index, onRates, onPhotos }) {
 
       {/* Bottom label */}
       <div className="absolute bottom-0 left-0 right-0 px-5 py-4" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.5), transparent)" }}>
-        <p className="text-white/50 text-xs">
-          {service.title} — click to view gallery
+        <p className="text-white/50 text-xs">{service.title} — click to view gallery</p>
+        <p className="text-yellow/40 font-mono text-xs mt-0.5">
+          {service.photoPrefix}-1.jpg … {service.photoPrefix}-5.jpg
         </p>
       </div>
     </button>

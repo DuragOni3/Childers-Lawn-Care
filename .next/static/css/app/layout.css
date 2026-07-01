@@ -1077,6 +1077,9 @@ video {
 .overflow-y-auto {
   overflow-y: auto;
 }
+.break-all {
+  word-break: break-all;
+}
 .rounded-2xl {
   border-radius: 1rem;
 }
@@ -1270,6 +1273,10 @@ video {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
 .pb-20 {
   padding-bottom: 5rem;
 }
@@ -1314,6 +1321,9 @@ video {
 }
 .font-serif {
   font-family: Georgia, Cambria, serif;
+}
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .text-2xl {
   font-size: 1.5rem;
@@ -1482,6 +1492,15 @@ video {
 }
 .text-yellow\/60 {
   color: rgb(250 204 21 / 0.6);
+}
+.text-yellow\/30 {
+  color: rgb(250 204 21 / 0.3);
+}
+.text-yellow\/40 {
+  color: rgb(250 204 21 / 0.4);
+}
+.text-yellow\/50 {
+  color: rgb(250 204 21 / 0.5);
 }
 .opacity-0 {
   opacity: 0;

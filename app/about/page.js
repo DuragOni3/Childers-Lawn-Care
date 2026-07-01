@@ -1,27 +1,30 @@
 import Link from "next/link";
 
-function TeamCard({ size = "sm" }) {
+function TeamCard({ size = "sm", label = "team-photo.jpg" }) {
   const isLarge = size === "lg";
   return (
     <div className="flex flex-col items-center text-center">
       {/* Photo placeholder */}
       <div
-        className="w-full rounded-2xl overflow-hidden mb-4 relative"
+        className="w-full rounded-2xl overflow-hidden mb-3 relative"
         style={{
           aspectRatio: "1 / 1",
           background: "linear-gradient(135deg, #0d3d1a 0%, #1a5c2a 100%)",
           border: "1px solid rgba(30,126,52,0.3)",
         }}
       >
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-1">
           <svg
-            className={`${isLarge ? "w-16 h-16" : "w-11 h-11"} text-white/10`}
+            className={`${isLarge ? "w-12 h-12" : "w-8 h-8"} text-white/10 shrink-0`}
             fill="currentColor"
             viewBox="0 0 24 24"
           >
             <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
           </svg>
-          <p className="text-white/10 text-xs mt-1">Photo</p>
+          <p className="text-yellow/30 font-mono leading-tight mt-2 break-all"
+             style={{ fontSize: "0.55rem" }}>
+            {label}
+          </p>
         </div>
       </div>
 
@@ -82,7 +85,7 @@ export default function AboutPage() {
           {/* ── Level 1 — 1 card centered ── */}
           <div className="flex justify-center mb-0">
             <div className="w-40 sm:w-56 lg:w-72">
-              <TeamCard size="lg" />
+              <TeamCard size="lg" label="team-owner.jpg" />
             </div>
           </div>
 
@@ -91,7 +94,9 @@ export default function AboutPage() {
 
           {/* ── Level 2 — 3 cards ── */}
           <div className="grid grid-cols-3 gap-3 sm:gap-6 lg:gap-10 max-w-xs sm:max-w-xl lg:max-w-3xl mx-auto mb-0">
-            <TeamCard /><TeamCard /><TeamCard />
+            <TeamCard label="team-2a.jpg" />
+            <TeamCard label="team-2b.jpg" />
+            <TeamCard label="team-2c.jpg" />
           </div>
 
           {/* Connector L2 → L3 */}
@@ -99,7 +104,9 @@ export default function AboutPage() {
 
           {/* ── Level 3 — 3 cards ── */}
           <div className="grid grid-cols-3 gap-3 sm:gap-6 lg:gap-10 max-w-xs sm:max-w-xl lg:max-w-3xl mx-auto">
-            <TeamCard /><TeamCard /><TeamCard />
+            <TeamCard label="team-3a.jpg" />
+            <TeamCard label="team-3b.jpg" />
+            <TeamCard label="team-3c.jpg" />
           </div>
 
         </div>
